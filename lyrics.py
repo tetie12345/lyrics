@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 import subprocess as s
 import threading as t
 from time import sleep
