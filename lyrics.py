@@ -2,7 +2,7 @@
 import subprocess as s
 import threading as t
 from time import sleep
-import os
+import os, textwrap
 
 def waitfornextsong():
     output = s.run(['cmus-remote', '-Q'], stdout=s.PIPE).stdout.decode('utf-8')
@@ -37,9 +37,7 @@ def start():
         info = s.run(['cmus-remote', '-Q'], stdout=s.PIPE).stdout.decode('utf-8')
         currenttime = int([k[-1] for k in [j.split() for j in [i for i in info.split('\n') if i.startswith("position")]]][0])
         songraw = [k[2:] for k in [j.split() for j in [i for i in info.split('\n') if i.startswith("tag artist") or i.startswith("tag title")]]]
-        if currenttime in timings: print(' '.join(lyrics[timings.index(currenttime)][1:]))
+        if currenttime in timings: os.system("clear"); print(textwrap.fill(' '.join(lyrics[timings.index(currenttime)][1:]),40), end='\r'); sleep(1.2)
         if songraw != previoussong: return
-
-while 1:
-    os.system("clear")
-    start()
+print('\033[?25l', end="")
+while 1: os.system("clear"); start()
