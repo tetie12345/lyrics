@@ -1,9 +1,13 @@
 #! /usr/bin/env python
 import subprocess as s
-import syncedlyrics as sy
 import threading as t
 from time import sleep
 import os, textwrap
+
+try:
+    import syncedlyrics as sy
+except ImportError:
+    os.system("pip install syncedlyrics")
 
 def getsong():
     output = s.run(['cmus-remote', '-Q'], stdout=s.PIPE).stdout.decode('utf-8')
