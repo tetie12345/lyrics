@@ -27,6 +27,7 @@ the program may attempt to install any missing packages that it needs, and will 
 
 if you want to add lyricist to your path
 > why the fuck would you want this in your path but sure
+
 simply make the file executable, and put it in your path
 
 ```
