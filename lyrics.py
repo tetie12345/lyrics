@@ -27,12 +27,17 @@ def start():
             sy.search(song, synced_only=True, save_path=f"{song}.lrc", providers=["NetEase", "Lrclib", "Megalobiz"])
             os.system(f'mv "{song}.lrc" ~/.cache/lyricist/')
         with open(f"/home/Floris/.cache/lyricist/{song}.lrc", "r") as f:
-            lyrics = [i.split() for i in f.read().split('\n')]
+            lyrics = [i.split() for i in f.read().split('\n')][:-1]
     except Exception as e:
+        currentsong = getsong()[0]
+        currentsong = " ".join(currentsong[1] + currentsong[0])
+        if currentsong != song: return
         print(f'could not find any lyrics for "{song}"')
         waitfornextsong()
         return
     timings = [round(float(lyrics[i][0][4:-1]))+int(lyrics[i][0][1:3])*60 for i in range(len(lyrics))]
+    timings.append(timings[-1]+8)
+    lyrics.append("a")
     previoussong = songraw
     while 1:
         previoussong = songraw
