@@ -8,6 +8,7 @@ try:
     import syncedlyrics as sy
 except ImportError:
     os.system("pip install syncedlyrics")
+    import syncedlyrics as sy
 
 def getsong():
     output = s.run(['cmus-remote', '-Q'], stdout=s.PIPE).stdout.decode('utf-8')
